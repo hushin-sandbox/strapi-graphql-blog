@@ -1,0 +1,7 @@
+schema: http://localhost:1337/graphql
+generates:
+  schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      commentDescriptions: true
