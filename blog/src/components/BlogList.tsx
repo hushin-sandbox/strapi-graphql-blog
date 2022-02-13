@@ -1,8 +1,9 @@
 import graphql from 'babel-plugin-relay/macro'
 import React from 'react'
 import { useLazyLoadQuery } from 'react-relay'
+import { BlogListQuery } from './__generated__/BlogListQuery.graphql'
 const BlogList: React.VFC = () => {
-  useLazyLoadQuery(
+  const { blogs } = useLazyLoadQuery<BlogListQuery>(
     graphql`
       query BlogListQuery {
         blogs {
@@ -19,6 +20,12 @@ const BlogList: React.VFC = () => {
       first: 10,
     }
   )
-  return null
+  return (
+    <ul>
+      {blogs?.data.map((v) => (
+        <li key={v.id}>{v.attributes?.Title}</li>
+      ))}
+    </ul>
+  )
 }
 export default BlogList
